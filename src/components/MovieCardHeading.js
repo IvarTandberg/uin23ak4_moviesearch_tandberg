@@ -4,7 +4,7 @@ import React from "react";
 const MovieCardHeading = (props) => {
     return (
         <div className="col">
-            <h1>{props.heading}</h1>
+            <h1 className="overskrift">{props.heading}</h1>
         </div>
     );
 };

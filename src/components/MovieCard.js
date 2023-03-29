@@ -5,9 +5,7 @@ const placeholderbilde = (event) => {
     event.target.src = "https://cms-cdn.placeholder.co/Home_page1_76f0b1d7ab.png?width=3840";
   };
 
-  const popup = (event) => {
-    event.target.src = "https://cms-cdn.placeholder.co/Home_page1_76f0b1d7ab.png?width=3840";
-  };
+
 
 
 
@@ -18,16 +16,23 @@ const MovieCard = (props) => {
         <>
             
             {props.movies?.map((movie, index) => 
-                <div className="col" onClick={placeholderbilde}>
-                    <img 
+                <div className="col" /*onClick={placeholderbilde}*/>
+                    <div className="movieoversikt">
+                    <img className="poster"
                         src={movie.Poster} 
                         alt='movie' 
                         onError={placeholderbilde}
-                        onClick={popup}
+                        //onClick={popup} //fremtidig funksjon
                         ></img>
-                    <h2 className="title">{movie.Title}</h2>
-                    <p>{movie.Director}</p>
-                    <p>{movie.Plot}</p>
+                    <div className="textboks">
+                        <h2 className="title">{movie.Title}</h2>
+                        <p>{movie.Year}</p>
+                        <p>{movie.Genre}</p>
+                        <p>Director: {movie.Director}</p>
+                        <p>Actors: {movie.Actors}</p>
+                        <p>Awards: {movie.Awards}</p>
+                    </div>
+                    </div>
                    
                     
                 </div>

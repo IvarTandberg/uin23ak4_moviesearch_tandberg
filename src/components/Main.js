@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import MovieCard from "./MovieCard";
 import MovieCardHeading from "./MovieCardHeading";
-import SearchBox from "./SearchBox";
+import SearchBox from "./SearchResults";
 
 // funksjonen er basert på  løsningen vis i https://www.youtube.com/watch?v=jc9_Bqzy2YQ
 export default function Main(){
@@ -10,31 +10,7 @@ export default function Main(){
     const [movies, setMovies] = useState([]);
     const [movieInfo, setMovieInfo] = useState([]);
     const [searchValue, setSearchValue] = useState ('James Bond')
-    /*
-    const getMovieRequest = async () => {
-        const url =`http://www.omdbapi.com/?s=${searchValue}&type=movie&apikey=70816349`
-
-        const response = await fetch(url);
-        const responseJson = await response.json();
-        
-        
-        
-
-        if(responseJson.Search) {
-            setMovies(responseJson.Search);
-            console.log(responseJson);
-            
-        }
-        
-    }
-
-    const getMovieInfo = async (movies) => {
-        const url =`http://www.omdbapi.com/?i=${movies.imdbID}&type=movie&apikey=70816349`
-
-        const response = await fetch(url);
-        const responseJson = await response.json();
-        console.log(responseJson) 
-    }*/
+    
     const getMovieRequest = async () => {
         const url =`http://www.omdbapi.com/?s=${searchValue}&type=movie&apikey=70816349`
 
@@ -42,7 +18,7 @@ export default function Main(){
         setMovies(response.Search)
         return response
     }
-
+// løsningn for getMovieInfo fikk jeg hjelp av medstudenter og studass for å løse 
     const getMovieInfo = async () => {
         const { Search: search } = await getMovieRequest();
         const movieInfoPromises = search.map(async movie => {
@@ -54,27 +30,17 @@ export default function Main(){
         setMovieInfo(movieInfo);
       };
 
-/*     const getMovieInfo = async () => {
-        
-        const {Search: search} = await getMovieRequest()
-        console.log(search)
-        const url =`http://www.omdbapi.com/?i=${search[0].imdbID}&type=movie&apikey=70816349`
-        
-        const response = await fetch(url).then(response => response.json());
-        setMovieInfo(response.Search)
-        console.log(response)
 
-    } */
     useEffect(() => {
         getMovieInfo()
         console.log(movieInfo)
     }, [searchValue])
 
     
-
+// funksjonen er basert på  løsningen vis i https://www.youtube.com/watch?v=jc9_Bqzy2YQ
     return <div className='container-fluid movie-app'>
         <div className='row d-flex align-items-center mt-4 mb-4'>
-            <MovieCardHeading heading="Filmer"/>
+            <MovieCardHeading heading="Filmorama"/>
             <SearchBox  searchValue={searchValue} setSearchValue={setSearchValue}/>
         </div>
         <div className="row"> 
