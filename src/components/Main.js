@@ -1,17 +1,40 @@
 import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import MovieCard from "./MovieCard";
+import MovieCardHeading from "./MovieCardHeading";
+import SearchBox from "./SearchBox";
 
+// funksjonen er basert på  løsningen vis i https://www.youtube.com/watch?v=jc9_Bqzy2YQ
 export default function Main(){
 
+    const [movies, setMovies] = useState([]);
+    const [searchValue, setSearchValue] = useState ('James Bond')
+    
+    const getMovieRequest = async () => {
+        const url =`http://www.omdbapi.com/?s=${searchValue}&type=movie&apikey=70816349`
 
-    const getMovies = async() =>{
-        const [movies, setMovies] = useState([]);
+        const response = await fetch(url);
+        const responseJson = await response.json();
+        
+        
+        
+
+        if(responseJson.Search) {
+            setMovies(responseJson.Search);
+            console.log(responseJson);
+        }
+        
     }
-    const getMovieRequest = () => {
-        const url
-    }
+
+    useEffect(() => {
+        getMovieRequest(searchValue);
+    }, [searchValue])
+
     return <div className='container-fluid movie-app'>
+        <div className='row d-flex align-items-center mt-4 mb-4'>
+            <MovieCardHeading heading="Filmer"/>
+            <SearchBox  searchValue={searchValue} setSearchValue={setSearchValue}/>
+        </div>
         <div className="row"> 
             <MovieCard movies={movies} />
         </div>
