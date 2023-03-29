@@ -17,7 +17,7 @@ const MovieCard = (props) => {
     return (
         <>
             
-            {props.movies.map((movie, index)=> 
+            {props.movies?.map((movie, index) => 
                 <div className="col" onClick={placeholderbilde}>
                     <img 
                         src={movie.Poster} 
@@ -26,6 +26,8 @@ const MovieCard = (props) => {
                         onClick={popup}
                         ></img>
                     <h2 className="title">{movie.Title}</h2>
+                    <p>{movie.Director}</p>
+                    <p>{movie.Plot}</p>
                    
                     
                 </div>
