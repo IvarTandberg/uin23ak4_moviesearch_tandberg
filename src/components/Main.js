@@ -22,12 +22,23 @@ export default function Main(){
         if(responseJson.Search) {
             setMovies(responseJson.Search);
             console.log(responseJson);
+            
         }
         
     }
 
+    const getMovieInfo = async () => {
+        const url =`http://www.omdbapi.com/?i=${movies}&type=movie&apikey=70816349`
+
+        const response = await fetch(url);
+        const responseJson = await response.json();
+        console.log(responseJson);
+    }
+        
+
     useEffect(() => {
         getMovieRequest(searchValue);
+        getMovieInfo(movies);
     }, [searchValue])
 
     return <div className='container-fluid movie-app'>

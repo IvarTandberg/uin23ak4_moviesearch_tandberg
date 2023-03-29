@@ -26,6 +26,7 @@ const MovieCard = (props) => {
                         onClick={popup}
                         ></img>
                     <h2 className="title">{movie.Title}</h2>
+                   
                     
                 </div>
                 )}
